@@ -1,0 +1,1569 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{nuvu\_prueba}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt} 
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+\end{Verbatim}
+
+
+    \hypertarget{limpieza-y-anuxe1lisis-de-datos}{%
+\subsection{Limpieza y Análisis de
+Datos}\label{limpieza-y-anuxe1lisis-de-datos}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{data\PYZus{}fifa19}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fifadata.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{decimal}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{data\PYZus{}fifa19}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} Index(['Unnamed: 0', 'ID', 'Name', 'Age', 'Photo', 'Nationality', 'Flag',
+                'Overall', 'Potential', 'Club', 'Club Logo', 'Value', 'Wage', 'Special',
+                'Preferred Foot', 'International Reputation', 'Weak Foot',
+                'Skill Moves', 'Work Rate', 'Body Type', 'Real Face', 'Position',
+                'Jersey Number', 'Joined', 'Loaned From', 'Contract Valid Until',
+                'Height', 'Weight', 'LS', 'ST', 'RS', 'LW', 'LF', 'CF', 'RF', 'RW',
+                'LAM', 'CAM', 'RAM', 'LM', 'LCM', 'CM', 'RCM', 'RM', 'LWB', 'LDM',
+                'CDM', 'RDM', 'RWB', 'LB', 'LCB', 'CB', 'RCB', 'RB', 'Crossing',
+                'Finishing', 'HeadingAccuracy', 'ShortPassing', 'Volleys', 'Dribbling',
+                'Curve', 'FKAccuracy', 'LongPassing', 'BallControl', 'Acceleration',
+                'SprintSpeed', 'Agility', 'Reactions', 'Balance', 'ShotPower',
+                'Jumping', 'Stamina', 'Strength', 'LongShots', 'Aggression',
+                'Interceptions', 'Positioning', 'Vision', 'Penalties', 'Composure',
+                'Marking', 'StandingTackle', 'SlidingTackle', 'GKDiving', 'GKHandling',
+                'GKKicking', 'GKPositioning', 'GKReflexes', 'Release Clause'],
+               dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{data\PYZus{}fifa19}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:} 0        €110.5M
+         1           €77M
+         2        €118.5M
+         3           €72M
+         4          €102M
+                   {\ldots}   
+         18202       €60K
+         18203       €60K
+         18204       €60K
+         18205       €60K
+         18206       €60K
+         Name: Value, Length: 18207, dtype: object
+\end{Verbatim}
+            
+    Genearamos una copia de los datos, por si podemos errar en su
+procesamiento o la persona que nos lo facilito pueda hacer uso de ellos
+para otro tipo de análisis
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{=}\PY{n}{data\PYZus{}fifa19}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{data\PYZus{}fifa19\PYZus{}1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:}        Unnamed: 0      ID                Name  Age  \textbackslash{}
+         0               0  158023            L. Messi   31   
+         1               1   20801   Cristiano Ronaldo   33   
+         2               2  190871           Neymar Jr   26   
+         3               3  193080              De Gea   27   
+         4               4  192985        K. De Bruyne   27   
+         {\ldots}           {\ldots}     {\ldots}                 {\ldots}  {\ldots}   
+         18202       18202  238813        J. Lundstram   19   
+         18203       18203  243165  N. Christoffersson   19   
+         18204       18204  241638           B. Worman   16   
+         18205       18205  246268      D. Walker-Rice   17   
+         18206       18206  246269           G. Nugent   16   
+         
+                                                         Photo Nationality  \textbackslash{}
+         0      https://cdn.sofifa.org/players/4/19/158023.png   Argentina   
+         1       https://cdn.sofifa.org/players/4/19/20801.png    Portugal   
+         2      https://cdn.sofifa.org/players/4/19/190871.png      Brazil   
+         3      https://cdn.sofifa.org/players/4/19/193080.png       Spain   
+         4      https://cdn.sofifa.org/players/4/19/192985.png     Belgium   
+         {\ldots}                                               {\ldots}         {\ldots}   
+         18202  https://cdn.sofifa.org/players/4/19/238813.png     England   
+         18203  https://cdn.sofifa.org/players/4/19/243165.png      Sweden   
+         18204  https://cdn.sofifa.org/players/4/19/241638.png     England   
+         18205  https://cdn.sofifa.org/players/4/19/246268.png     England   
+         18206  https://cdn.sofifa.org/players/4/19/246269.png     England   
+         
+                                               Flag  Overall  Potential  \textbackslash{}
+         0      https://cdn.sofifa.org/flags/52.png       94         94   
+         1      https://cdn.sofifa.org/flags/38.png       94         94   
+         2      https://cdn.sofifa.org/flags/54.png       92         93   
+         3      https://cdn.sofifa.org/flags/45.png       91         93   
+         4       https://cdn.sofifa.org/flags/7.png       91         92   
+         {\ldots}                                    {\ldots}      {\ldots}        {\ldots}   
+         18202  https://cdn.sofifa.org/flags/14.png       47         65   
+         18203  https://cdn.sofifa.org/flags/46.png       47         63   
+         18204  https://cdn.sofifa.org/flags/14.png       47         67   
+         18205  https://cdn.sofifa.org/flags/14.png       47         66   
+         18206  https://cdn.sofifa.org/flags/14.png       46         66   
+         
+                               Club  {\ldots} Composure Marking StandingTackle  \textbackslash{}
+         0             FC Barcelona  {\ldots}      96.0    33.0           28.0   
+         1                 Juventus  {\ldots}      95.0    28.0           31.0   
+         2      Paris Saint-Germain  {\ldots}      94.0    27.0           24.0   
+         3        Manchester United  {\ldots}      68.0    15.0           21.0   
+         4          Manchester City  {\ldots}      88.0    68.0           58.0   
+         {\ldots}                    {\ldots}  {\ldots}       {\ldots}     {\ldots}            {\ldots}   
+         18202      Crewe Alexandra  {\ldots}      45.0    40.0           48.0   
+         18203       Trelleborgs FF  {\ldots}      42.0    22.0           15.0   
+         18204     Cambridge United  {\ldots}      41.0    32.0           13.0   
+         18205      Tranmere Rovers  {\ldots}      46.0    20.0           25.0   
+         18206      Tranmere Rovers  {\ldots}      43.0    40.0           43.0   
+         
+                SlidingTackle GKDiving  GKHandling  GKKicking  GKPositioning  \textbackslash{}
+         0               26.0      6.0        11.0       15.0           14.0   
+         1               23.0      7.0        11.0       15.0           14.0   
+         2               33.0      9.0         9.0       15.0           15.0   
+         3               13.0     90.0        85.0       87.0           88.0   
+         4               51.0     15.0        13.0        5.0           10.0   
+         {\ldots}              {\ldots}      {\ldots}         {\ldots}        {\ldots}            {\ldots}   
+         18202           47.0     10.0        13.0        7.0            8.0   
+         18203           19.0     10.0         9.0        9.0            5.0   
+         18204           11.0      6.0         5.0       10.0            6.0   
+         18205           27.0     14.0         6.0       14.0            8.0   
+         18206           50.0     10.0        15.0        9.0           12.0   
+         
+               GKReflexes Release Clause  
+         0            8.0        €226.5M  
+         1           11.0        €127.1M  
+         2           11.0        €228.1M  
+         3           94.0        €138.6M  
+         4           13.0        €196.4M  
+         {\ldots}          {\ldots}            {\ldots}  
+         18202        9.0          €143K  
+         18203       12.0          €113K  
+         18204       13.0          €165K  
+         18205        9.0          €143K  
+         18206        9.0          €165K  
+         
+         [18207 rows x 89 columns]
+\end{Verbatim}
+            
+    Al revisar los datos, encontramos atributos con direcciones o links, y
+especificacion de posciones que no aportarian a nuestro objetivo. Por lo
+tanto las eliminaremos
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Photo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Flag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Club Logo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ST}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LW}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LF}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CF}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RF}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RW}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LAM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RAM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LCM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RCM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LWB}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LDM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CDM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RDM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RWB}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LB}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LCB}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CB}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RCB}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RB}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{data\PYZus{}fifa19\PYZus{}1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:}            ID                Name  Age Nationality  Overall  Potential  \textbackslash{}
+         0      158023            L. Messi   31   Argentina       94         94   
+         1       20801   Cristiano Ronaldo   33    Portugal       94         94   
+         2      190871           Neymar Jr   26      Brazil       92         93   
+         3      193080              De Gea   27       Spain       91         93   
+         4      192985        K. De Bruyne   27     Belgium       91         92   
+         {\ldots}       {\ldots}                 {\ldots}  {\ldots}         {\ldots}      {\ldots}        {\ldots}   
+         18202  238813        J. Lundstram   19     England       47         65   
+         18203  243165  N. Christoffersson   19      Sweden       47         63   
+         18204  241638           B. Worman   16     England       47         67   
+         18205  246268      D. Walker-Rice   17     England       47         66   
+         18206  246269           G. Nugent   16     England       46         66   
+         
+                               Club    Value   Wage  Special  {\ldots} Composure  Marking  \textbackslash{}
+         0             FC Barcelona  €110.5M  €565K     2202  {\ldots}      96.0     33.0   
+         1                 Juventus     €77M  €405K     2228  {\ldots}      95.0     28.0   
+         2      Paris Saint-Germain  €118.5M  €290K     2143  {\ldots}      94.0     27.0   
+         3        Manchester United     €72M  €260K     1471  {\ldots}      68.0     15.0   
+         4          Manchester City    €102M  €355K     2281  {\ldots}      88.0     68.0   
+         {\ldots}                    {\ldots}      {\ldots}    {\ldots}      {\ldots}  {\ldots}       {\ldots}      {\ldots}   
+         18202      Crewe Alexandra     €60K    €1K     1307  {\ldots}      45.0     40.0   
+         18203       Trelleborgs FF     €60K    €1K     1098  {\ldots}      42.0     22.0   
+         18204     Cambridge United     €60K    €1K     1189  {\ldots}      41.0     32.0   
+         18205      Tranmere Rovers     €60K    €1K     1228  {\ldots}      46.0     20.0   
+         18206      Tranmere Rovers     €60K    €1K     1321  {\ldots}      43.0     40.0   
+         
+                StandingTackle  SlidingTackle GKDiving GKHandling GKKicking  \textbackslash{}
+         0                28.0           26.0      6.0       11.0      15.0   
+         1                31.0           23.0      7.0       11.0      15.0   
+         2                24.0           33.0      9.0        9.0      15.0   
+         3                21.0           13.0     90.0       85.0      87.0   
+         4                58.0           51.0     15.0       13.0       5.0   
+         {\ldots}               {\ldots}            {\ldots}      {\ldots}        {\ldots}       {\ldots}   
+         18202            48.0           47.0     10.0       13.0       7.0   
+         18203            15.0           19.0     10.0        9.0       9.0   
+         18204            13.0           11.0      6.0        5.0      10.0   
+         18205            25.0           27.0     14.0        6.0      14.0   
+         18206            43.0           50.0     10.0       15.0       9.0   
+         
+               GKPositioning  GKReflexes Release Clause  
+         0              14.0         8.0        €226.5M  
+         1              14.0        11.0        €127.1M  
+         2              15.0        11.0        €228.1M  
+         3              88.0        94.0        €138.6M  
+         4              10.0        13.0        €196.4M  
+         {\ldots}             {\ldots}         {\ldots}            {\ldots}  
+         18202           8.0         9.0          €143K  
+         18203           5.0        12.0          €113K  
+         18204           6.0        13.0          €165K  
+         18205           8.0         9.0          €143K  
+         18206          12.0         9.0          €165K  
+         
+         [18207 rows x 59 columns]
+\end{Verbatim}
+            
+    después revisamos el valor de nulos en el dataset, y ver cual es la
+mejor opcion, si eliminarlos, llenarlos con la media o 0
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:} ID                              0
+         Name                            0
+         Age                             0
+         Nationality                     0
+         Overall                         0
+         Potential                       0
+         Club                          241
+         Value                           0
+         Wage                            0
+         Special                         0
+         Preferred Foot                 48
+         International Reputation       48
+         Weak Foot                      48
+         Skill Moves                    48
+         Work Rate                      48
+         Body Type                      48
+         Real Face                      48
+         Position                       60
+         Jersey Number                  60
+         Joined                       1553
+         Loaned From                 16943
+         Contract Valid Until          289
+         Height                         48
+         Weight                         48
+         Crossing                       48
+         Finishing                      48
+         HeadingAccuracy                48
+         ShortPassing                   48
+         Volleys                        48
+         Dribbling                      48
+         Curve                          48
+         FKAccuracy                     48
+         LongPassing                    48
+         BallControl                    48
+         Acceleration                   48
+         SprintSpeed                    48
+         Agility                        48
+         Reactions                      48
+         Balance                        48
+         ShotPower                      48
+         Jumping                        48
+         Stamina                        48
+         Strength                       48
+         LongShots                      48
+         Aggression                     48
+         Interceptions                  48
+         Positioning                    48
+         Vision                         48
+         Penalties                      48
+         Composure                      48
+         Marking                        48
+         StandingTackle                 48
+         SlidingTackle                  48
+         GKDiving                       48
+         GKHandling                     48
+         GKKicking                      48
+         GKPositioning                  48
+         GKReflexes                     48
+         Release Clause               1564
+         dtype: int64
+\end{Verbatim}
+            
+    Encontramos atributos con datos por encima del valor permitible(20\% del
+total de los datos), por lo tanto no son relevantes ya que no aportan,
+por ende son eliminados
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loaned From}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joined}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Release Clause}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} Index(['ID', 'Name', 'Age', 'Nationality', 'Overall', 'Potential', 'Club',
+                'Value', 'Wage', 'Special', 'Preferred Foot',
+                'International Reputation', 'Weak Foot', 'Skill Moves', 'Work Rate',
+                'Body Type', 'Real Face', 'Position', 'Jersey Number',
+                'Contract Valid Until', 'Height', 'Weight', 'Crossing', 'Finishing',
+                'HeadingAccuracy', 'ShortPassing', 'Volleys', 'Dribbling', 'Curve',
+                'FKAccuracy', 'LongPassing', 'BallControl', 'Acceleration',
+                'SprintSpeed', 'Agility', 'Reactions', 'Balance', 'ShotPower',
+                'Jumping', 'Stamina', 'Strength', 'LongShots', 'Aggression',
+                'Interceptions', 'Positioning', 'Vision', 'Penalties', 'Composure',
+                'Marking', 'StandingTackle', 'SlidingTackle', 'GKDiving', 'GKHandling',
+                'GKKicking', 'GKPositioning', 'GKReflexes'],
+               dtype='object')
+\end{Verbatim}
+            
+    Inicialmente vemos que los datos de interes como Value y Waste, estan
+acompañados por simbologia monetaria. Tenemos que dejarlos puramente
+numeros para poder realizar los respectivos análisis
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{c+c1}{\PYZsh{}Limpieza de simbolos en Value and Wage para el analisis de datos}
+         \PY{k}{def} \PY{n+nf}{val\PYZus{}to\PYZus{}real}\PY{p}{(}\PY{n}{val}\PY{p}{)}\PY{p}{:}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{value} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{val}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{suff\PYZus{}value}\PY{o}{=}\PY{n}{val}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{suff\PYZus{}value}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{M}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{value}\PY{o}{=}\PY{n}{value}\PY{o}{*}\PY{l+m+mi}{1000000}
+                 \PY{k}{elif}\PY{p}{(}\PY{n}{suff\PYZus{}value}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{K}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{value}\PY{o}{=}\PY{n}{value}\PY{o}{*}\PY{l+m+mi}{1000}
+             \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:}
+                 \PY{n}{value}\PY{o}{=}\PY{l+m+mi}{0}
+             \PY{k}{return} \PY{n}{value}
+         
+         \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{val\PYZus{}to\PYZus{}real}\PY{p}{)}
+         \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wage}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wage}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{val\PYZus{}to\PYZus{}real}\PY{p}{)}
+\end{Verbatim}
+
+
+    Ahora podemos hacer su estadistica correspondiente
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{c+c1}{\PYZsh{}d=data\PYZus{}fifa19\PYZus{}1.sort\PYZus{}values(ascending=False, by=\PYZdq{}Value\PYZdq{})}
+         \PY{c+c1}{\PYZsh{}d[[\PYZdq{}Name\PYZdq{},\PYZdq{}Value\PYZdq{},\PYZdq{}Wage\PYZdq{}]]}
+         \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}67}]:} count    1.820700e+04
+         mean     2.410696e+06
+         std      5.594933e+06
+         min      0.000000e+00
+         25\%      3.000000e+05
+         50\%      6.750000e+05
+         75\%      2.000000e+06
+         max      1.185000e+08
+         Name: Value, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{m}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{by}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wage}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{m}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wage}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Overall}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Potential}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{International Reputation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}69}]:}                     Name        Value      Wage  Overall  Age  Potential  \textbackslash{}
+         0               L. Messi  110500000.0  565000.0       94   31         94   
+         7              L. Suárez   80000000.0  455000.0       91   31         91   
+         6              L. Modrić   67000000.0  420000.0       91   32         91   
+         1      Cristiano Ronaldo   77000000.0  405000.0       94   33         94   
+         8           Sergio Ramos   51000000.0  380000.0       91   32         91   
+         {\ldots}                  {\ldots}          {\ldots}       {\ldots}      {\ldots}  {\ldots}        {\ldots}   
+         5614            A. Fathi          0.0       0.0       70   33         70   
+         14786           U. Singh          0.0       0.0       60   22         67   
+         3170          S. Ingason          0.0       0.0       73   24         78   
+         5595             D. Böde          0.0       0.0       70   31         70   
+         12684        C. Howieson          0.0       0.0       63   23         68   
+         
+                International Reputation  
+         0                           5.0  
+         7                           5.0  
+         6                           4.0  
+         1                           5.0  
+         8                           4.0  
+         {\ldots}                         {\ldots}  
+         5614                        2.0  
+         14786                       1.0  
+         3170                        1.0  
+         5595                        1.0  
+         12684                       1.0  
+         
+         [18207 rows x 7 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wage}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}70}]:} count     18207.000000
+         mean       9731.312133
+         std       21999.290406
+         min           0.000000
+         25\%        1000.000000
+         50\%        3000.000000
+         75\%        9000.000000
+         max      565000.000000
+         Name: Wage, dtype: float64
+\end{Verbatim}
+            
+    Anteriormente observamos que los nulls eran constante en las
+caracteristicas del jugador, si esto corresponde a los mismos index de
+cada caracteristica, podremos eliminarla sin preocupación de sesgar los
+datos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}123}]:} \PY{n}{arr\PYZus{}col\PYZus{}null\PYZus{}48}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+              \PY{k}{if} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{==}\PY{l+m+mi}{48}\PY{p}{:}
+                  \PY{n}{arr\PYZus{}col\PYZus{}null\PYZus{}48}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+           
+          
+          \PY{n}{arr\PYZus{}null\PYZus{}weight}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Weight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+          \PY{n}{arr\PYZus{}null\PYZus{}weight}
+          \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{arr\PYZus{}col\PYZus{}null\PYZus{}48}\PY{p}{:}
+              \PY{n}{temp}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{d}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+              \PY{k}{if} \PY{n}{arr\PYZus{}null\PYZus{}weight} \PY{o}{==} \PY{n}{temp}\PY{p}{:}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{They are same }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n}{d}\PY{p}{)}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{They}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{re not same}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}data\PYZus{}fifa19\PYZus{}1[\PYZdq{}Weight\PYZdq{}]=data\PYZus{}fifa19\PYZus{}1[\PYZdq{}Weight\PYZdq{}].apply(val\PYZus{}lib\PYZus{}real)}
+          \PY{c+c1}{\PYZsh{}data\PYZus{}fifa19\PYZus{}1[\PYZdq{}Height2\PYZdq{}]=data\PYZus{}fifa19\PYZus{}1[\PYZdq{}Height\PYZdq{}].apply(val\PYZus{}feet\PYZus{}real)}
+          \PY{c+c1}{\PYZsh{}data\PYZus{}fifa19\PYZus{}1.info()}
+          \PY{c+c1}{\PYZsh{}val\PYZus{}lib\PYZus{}real(data\PYZus{}fifa19\PYZus{}1[\PYZdq{}Weight\PYZdq{}][5])}
+          \PY{c+c1}{\PYZsh{}data\PYZus{}fifa19\PYZus{}1[[\PYZdq{}Weight\PYZdq{},\PYZdq{}Height\PYZdq{}]]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+They are same Preferred Foot
+They are same International Reputation
+They are same Weak Foot
+They are same Skill Moves
+They are same Work Rate
+They are same Body Type
+They are same Real Face
+They are same Height
+They are same Weight
+They are same Crossing
+They are same Finishing
+They are same HeadingAccuracy
+They are same ShortPassing
+They are same Volleys
+They are same Dribbling
+They are same Curve
+They are same FKAccuracy
+They are same LongPassing
+They are same BallControl
+They are same Acceleration
+They are same SprintSpeed
+They are same Agility
+They are same Reactions
+They are same Balance
+They are same ShotPower
+They are same Jumping
+They are same Stamina
+They are same Strength
+They are same LongShots
+They are same Aggression
+They are same Interceptions
+They are same Positioning
+They are same Vision
+They are same Penalties
+They are same Composure
+They are same Marking
+They are same StandingTackle
+They are same SlidingTackle
+They are same GKDiving
+They are same GKHandling
+They are same GKKicking
+They are same GKPositioning
+They are same GKReflexes
+
+    \end{Verbatim}
+
+    Comprobado ;)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}127}]:} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{n}{arr\PYZus{}null\PYZus{}weight}\PY{p}{]}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    Verificamos:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}128}]:} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}128}]:} ID                            0
+          Name                          0
+          Age                           0
+          Nationality                   0
+          Overall                       0
+          Potential                     0
+          Club                        241
+          Value                         0
+          Wage                          0
+          Special                       0
+          Preferred Foot                0
+          International Reputation      0
+          Weak Foot                     0
+          Skill Moves                   0
+          Work Rate                     0
+          Body Type                     0
+          Real Face                     0
+          Position                     12
+          Jersey Number                12
+          Contract Valid Until        241
+          Height                        0
+          Weight                        0
+          Crossing                      0
+          Finishing                     0
+          HeadingAccuracy               0
+          ShortPassing                  0
+          Volleys                       0
+          Dribbling                     0
+          Curve                         0
+          FKAccuracy                    0
+          LongPassing                   0
+          BallControl                   0
+          Acceleration                  0
+          SprintSpeed                   0
+          Agility                       0
+          Reactions                     0
+          Balance                       0
+          ShotPower                     0
+          Jumping                       0
+          Stamina                       0
+          Strength                      0
+          LongShots                     0
+          Aggression                    0
+          Interceptions                 0
+          Positioning                   0
+          Vision                        0
+          Penalties                     0
+          Composure                     0
+          Marking                       0
+          StandingTackle                0
+          SlidingTackle                 0
+          GKDiving                      0
+          GKHandling                    0
+          GKKicking                     0
+          GKPositioning                 0
+          GKReflexes                    0
+          dtype: int64
+\end{Verbatim}
+            
+    Hacemos lo mismo con Weight y Height, como con Value y Wage
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}135}]:} \PY{k}{def} \PY{n+nf}{val\PYZus{}lib\PYZus{}real}\PY{p}{(}\PY{n}{val}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{n}{value10}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{val}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:}
+                  \PY{n}{value10}\PY{o}{=}\PY{l+m+mi}{0}
+              \PY{k}{return} \PY{n}{value10}
+          
+          \PY{k}{def} \PY{n+nf}{val\PYZus{}feet\PYZus{}real}\PY{p}{(}\PY{n}{val}\PY{p}{)}\PY{p}{:}
+              \PY{k}{try}\PY{p}{:}
+                  \PY{n}{value1}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{val}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{30.48}
+                  \PY{n}{value2}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n}{val}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{2.54}
+                  \PY{n}{valueT}\PY{o}{=}\PY{n}{value1}\PY{o}{+}\PY{n}{value2}
+              \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:}
+                  \PY{n}{valueT}\PY{o}{=}\PY{l+m+mi}{0}
+              \PY{k}{return} \PY{n}{valueT}
+          
+          \PY{c+c1}{\PYZsh{}data\PYZus{}fifa19\PYZus{}1[\PYZdq{}Weight\PYZdq{}]=data\PYZus{}fifa19\PYZus{}1[\PYZdq{}Weight\PYZdq{}].apply(val\PYZus{}lib\PYZus{}real)}
+          \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Height}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Height}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{val\PYZus{}feet\PYZus{}real}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}136}]:} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Height}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Weight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}136}]:}        Height  Weight
+          0      170.18   159.0
+          1      187.96   183.0
+          2      175.26   150.0
+          3      193.04   168.0
+          4      180.34   154.0
+          {\ldots}       {\ldots}     {\ldots}
+          18202  175.26   134.0
+          18203  190.50   170.0
+          18204  172.72   148.0
+          18205  177.80   154.0
+          18206  177.80   176.0
+          
+          [18159 rows x 2 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}152}]:} \PY{n}{index\PYZus{}null\PYZus{}jersey\PYZus{}number}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Jersey Number}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+          \PY{n}{index\PYZus{}null\PYZus{}position}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+          
+          \PY{k}{if} \PY{n}{index\PYZus{}null\PYZus{}jersey\PYZus{}number}\PY{o}{==}\PY{n}{index\PYZus{}null\PYZus{}position}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{They are same}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{k}{else}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{They}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{re not same}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+They are same
+
+    \end{Verbatim}
+
+    Clasificamos las variables categoricas y cualitativas, para entender la
+relación con Value (nuestra variable objetivo)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}155}]:} \PY{n}{var\PYZus{}col\PYZus{}category}\PY{o}{=}\PY{p}{[}\PY{n}{name} \PY{k}{for} \PY{n}{name} \PY{o+ow}{in} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{columns} \PY{k}{if} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{name}\PY{p}{]}\PY{o}{.}\PY{n}{dtype} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{object}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{var\PYZus{}col\PYZus{}category}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}155}]:} ['Name',
+           'Nationality',
+           'Club',
+           'Preferred Foot',
+           'Work Rate',
+           'Body Type',
+           'Real Face',
+           'Position',
+           'Contract Valid Until']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}160}]:} \PY{n}{var\PYZus{}col\PYZus{}numeric}\PY{o}{=}\PY{p}{[}\PY{n}{num} \PY{k}{for} \PY{n}{num} \PY{o+ow}{in} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{columns} \PY{k}{if} \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{num}\PY{p}{]}\PY{o}{.}\PY{n}{dtype} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{var\PYZus{}col\PYZus{}numeric}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}160}]:} ['ID',
+           'Age',
+           'Overall',
+           'Potential',
+           'Value',
+           'Wage',
+           'Special',
+           'International Reputation',
+           'Weak Foot',
+           'Skill Moves',
+           'Jersey Number',
+           'Height',
+           'Weight',
+           'Crossing',
+           'Finishing',
+           'HeadingAccuracy',
+           'ShortPassing',
+           'Volleys',
+           'Dribbling',
+           'Curve',
+           'FKAccuracy',
+           'LongPassing',
+           'BallControl',
+           'Acceleration',
+           'SprintSpeed',
+           'Agility',
+           'Reactions',
+           'Balance',
+           'ShotPower',
+           'Jumping',
+           'Stamina',
+           'Strength',
+           'LongShots',
+           'Aggression',
+           'Interceptions',
+           'Positioning',
+           'Vision',
+           'Penalties',
+           'Composure',
+           'Marking',
+           'StandingTackle',
+           'SlidingTackle',
+           'GKDiving',
+           'GKHandling',
+           'GKKicking',
+           'GKPositioning',
+           'GKReflexes']
+\end{Verbatim}
+            
+    \hypertarget{anuxe1lisis-de-las-variables-cualitativas-con-respecto-al-valor-del-jugador}{%
+\subsection{Análisis de las Variables Cualitativas con respecto al valor
+del
+jugador}\label{anuxe1lisis-de-las-variables-cualitativas-con-respecto-al-valor-del-jugador}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}187}]:} \PY{n}{countries}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nationality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nationality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{}countries}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nationality}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{countries}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nationality}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{countries}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nationality}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{yscale}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value By Nationality}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Es importate el país donde provenga el jugador para su valor en el
+negocio del futbol, evidenciamos que liderando Brazil junto con España
+seguido de Argentina, Francia e Italia. Tienen presencia en los
+jugadores mas costosos. Esto puede ser un factor importante para los
+gerentes al definir el valor de un jugador.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}196}]:} \PY{n}{clubs\PYZus{}group}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Club}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Club}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{}clubs\PYZus{}group}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{graph2}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Club}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{clubs\PYZus{}group}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Club}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{clubs\PYZus{}group}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Club}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{yscale}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value By Club}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Podemos ver que el tipo de equipo es influyente sobre el valor del
+jugador, Clubes como el Barcelona, Manchesters, Chelsea y el Mardrid
+encabezan con los jugadores más costosos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}197}]:} \PY{n}{foot\PYZus{}p}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Preferred Foot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Preferred Foot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{}countries}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Preferred Foot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{foot\PYZus{}p}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Preferred Foot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{foot\PYZus{}p}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Preferred Foot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{yscale}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value By Preferred Foot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Observamos que la preferencia con la pierna con la que domina el juego,
+no es muy relevante en el precio del jugador. Aunque es evidente un
+sesgo superior sobre los surdos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}199}]:} \PY{n}{work\PYZus{}r}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Work Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Work Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{}countries}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Work Rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{work\PYZus{}r}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Work Rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{work\PYZus{}r}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Work Rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{yscale}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value By Work Rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Claramente evidenciamos que su ritmo o desempeño es vital para su
+valoracion. En la gráfica de destacan las cualidades de High/High
+Medium/High High/Medium que dan valor al jugador
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}200}]:} \PY{n}{body\PYZus{}t}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Body Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Body Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{}countries}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Body Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{body\PYZus{}t}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Body Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{body\PYZus{}t}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Body Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{yscale}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value By Body Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    La estructura fisica se estandarizo al parecer con la de los mejores
+jugadores del mundo hasta el momento, con esta metrica se puede concluir
+que los jugadores mas parecidos a este tipo de patron de medida son los
+que tienen un valor agregado en el mercado del futbol
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}201}]:} \PY{n}{real\PYZus{}f}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Real Face}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Real Face}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{}countries}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Real Face}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{real\PYZus{}f}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Real Face}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{real\PYZus{}f}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Real Face}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{yscale}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value By Real Face}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Esta metrica es diferenciadora en el valor del jugador, pero exactamente
+parece un indicador orientado a la realidad virtual, por lo tanto lo
+descartaremos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}202}]:} \PY{n}{pos}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{}countries}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{pos}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{pos}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{yscale}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value By Position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Las posiciones mas destacadas son RF y LF
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}206}]:} \PY{n}{contr}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Contract Valid Until}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Contract Valid Until}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{}countries}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Contract Valid Until}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{contr}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Contract Valid Until}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{contr}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Contract Valid Until}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+          \PY{n}{graph1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{yscale}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value By }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Contract Valid Until}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    El valor del jugador es mayor cuando su contrato esta relacionado con la
+cantidad de tiempo que durara su contrato, observamos que en 2025 el
+valor de venta es mayor.
+
+    \hypertarget{anuxe1lisis-de-las-variables-cuantitativas-con-respecto-al-valor-del-jugador}{%
+\subsection{Análisis de las variables Cuantitativas con respecto al
+valor del
+jugador}\label{anuxe1lisis-de-las-variables-cuantitativas-con-respecto-al-valor-del-jugador}}
+
+    En este caso, por tratarse de este tipo de variables, realizaremos una
+matriz de correlación para entender, cual de estas variables esta más
+relacionada con el valor de un jugador, cabe aclarar, que estas
+variables son caracteristicas físicas y habilidades del jugador.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}229}]:} \PY{n}{corr}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{var\PYZus{}col\PYZus{}numeric}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+          \PY{n}{matrix}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{triu}\PY{p}{(}\PY{n}{corr}\PY{p}{)}
+          \PY{k}{with} \PY{n}{sns}\PY{o}{.}\PY{n}{axes\PYZus{}style}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{white}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n}{f}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+              \PY{n}{ax} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{corr}\PY{p}{,}\PY{n}{mask}\PY{o}{=}\PY{n}{matrix}\PY{p}{,}\PY{n}{square}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{linewidths}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{YlGnBu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Como se logra distinguir las caracteristicas más influyentes son:
+Composure, Reactions, International Reputation, Wage. Las siguientes
+serian la vision, longshots, shotpower, BallControl, LongPassing,
+FCAaccuarcy, curve, dribbling, volley, shortpassing, skillmoves, special
+y las bajas contariamos Agression, Accelaration, Agility, Penalties,
+SpringSpeed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}237}]:} \PY{n}{feature\PYZus{}abil\PYZus{}value}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Composure}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reactions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{International Reputation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wage}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Vision}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LongShots}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ShotPower}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{BallControl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LongPassing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FKAccuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Curve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dribbling}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Volleys}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ShortPassing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Skill Moves}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Aggression}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Acceleration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Agility}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Penalties}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SprintSpeed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{feature\PYZus{}abil\PYZus{}value}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}237}]:}                             count         mean           std   min     25\%  \textbackslash{}
+          Composure                 18159.0    58.648274     11.436133   3.0    51.0   
+          Reactions                 18159.0    61.836610      9.010464  21.0    56.0   
+          International Reputation  18159.0     1.113222      0.394031   1.0     1.0   
+          Wage                      18159.0  9752.574481  22024.397597   0.0  1000.0   
+          Vision                    18159.0    53.400903     14.146881  10.0    44.0   
+          LongShots                 18159.0    47.109973     19.260524   3.0    33.0   
+          ShotPower                 18159.0    55.460047     17.237958   2.0    45.0   
+          BallControl               18159.0    58.369459     16.686595   5.0    54.0   
+          LongPassing               18159.0    52.711933     15.327870   9.0    43.0   
+          FKAccuracy                18159.0    42.863153     17.478763   3.0    31.0   
+          Curve                     18159.0    47.170824     18.395264   6.0    34.0   
+          Dribbling                 18159.0    55.371001     18.910371   4.0    49.0   
+          Volleys                   18159.0    42.909026     17.694408   4.0    30.0   
+          ShortPassing              18159.0    58.686712     14.699495   7.0    54.0   
+          Skill Moves               18159.0     2.361308      0.756164   1.0     2.0   
+          Aggression                18159.0    55.868991     17.367967  11.0    44.0   
+          Acceleration              18159.0    64.614076     14.927780  12.0    57.0   
+          Agility                   18159.0    63.503607     14.766049  14.0    55.0   
+          Penalties                 18159.0    48.548598     15.704053   5.0    39.0   
+          SprintSpeed               18159.0    64.726967     14.649953  12.0    57.0   
+          
+                                       50\%     75\%       max  
+          Composure                   60.0    67.0      96.0  
+          Reactions                   62.0    68.0      96.0  
+          International Reputation     1.0     1.0       5.0  
+          Wage                      3000.0  9000.0  565000.0  
+          Vision                      55.0    64.0      94.0  
+          LongShots                   51.0    62.0      94.0  
+          ShotPower                   59.0    68.0      95.0  
+          BallControl                 63.0    69.0      96.0  
+          LongPassing                 56.0    64.0      93.0  
+          FKAccuracy                  41.0    57.0      94.0  
+          Curve                       48.0    62.0      94.0  
+          Dribbling                   61.0    68.0      97.0  
+          Volleys                     44.0    57.0      90.0  
+          ShortPassing                62.0    68.0      93.0  
+          Skill Moves                  2.0     3.0       5.0  
+          Aggression                  59.0    69.0      95.0  
+          Acceleration                67.0    75.0      97.0  
+          Agility                     66.0    74.0      96.0  
+          Penalties                   49.0    60.0      92.0  
+          SprintSpeed                 67.0    75.0      96.0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}239}]:} \PY{n}{features\PYZus{}total}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Crossing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Finishing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HeadingAccuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ShortPassing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Volleys}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dribbling}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Curve}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FKAccuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LongPassing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BallControl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Acceleration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SprintSpeed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Agility}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Reactions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Balance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ShotPower}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jumping}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stamina}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Strength}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LongShots}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Aggression}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Interceptions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Positioning}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Penalties}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Composure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Marking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{StandingTackle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SlidingTackle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GKDiving}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GKHandling}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GKKicking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GKPositioning}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GKReflexes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{features\PYZus{}total}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}239}]:}                    count       mean        std   min   25\%   50\%   75\%   max
+          Crossing         18159.0  49.734181  18.364524   5.0  38.0  54.0  64.0  93.0
+          Finishing        18159.0  45.550911  19.525820   2.0  30.0  49.0  62.0  95.0
+          HeadingAccuracy  18159.0  52.298144  17.379909   4.0  44.0  56.0  64.0  94.0
+          ShortPassing     18159.0  58.686712  14.699495   7.0  54.0  62.0  68.0  93.0
+          Volleys          18159.0  42.909026  17.694408   4.0  30.0  44.0  57.0  90.0
+          Dribbling        18159.0  55.371001  18.910371   4.0  49.0  61.0  68.0  97.0
+          Curve            18159.0  47.170824  18.395264   6.0  34.0  48.0  62.0  94.0
+          FKAccuracy       18159.0  42.863153  17.478763   3.0  31.0  41.0  57.0  94.0
+          LongPassing      18159.0  52.711933  15.327870   9.0  43.0  56.0  64.0  93.0
+          BallControl      18159.0  58.369459  16.686595   5.0  54.0  63.0  69.0  96.0
+          Acceleration     18159.0  64.614076  14.927780  12.0  57.0  67.0  75.0  97.0
+          SprintSpeed      18159.0  64.726967  14.649953  12.0  57.0  67.0  75.0  96.0
+          Agility          18159.0  63.503607  14.766049  14.0  55.0  66.0  74.0  96.0
+          Reactions        18159.0  61.836610   9.010464  21.0  56.0  62.0  68.0  96.0
+          Balance          18159.0  63.966573  14.136166  16.0  56.0  66.0  74.0  96.0
+          ShotPower        18159.0  55.460047  17.237958   2.0  45.0  59.0  68.0  95.0
+          Jumping          18159.0  65.089432  11.820044  15.0  58.0  66.0  73.0  95.0
+          Stamina          18159.0  63.219946  15.894741  12.0  56.0  66.0  74.0  96.0
+          Strength         18159.0  65.311967  12.557000  17.0  58.0  67.0  74.0  97.0
+          LongShots        18159.0  47.109973  19.260524   3.0  33.0  51.0  62.0  94.0
+          Aggression       18159.0  55.868991  17.367967  11.0  44.0  59.0  69.0  95.0
+          Interceptions    18159.0  46.698276  20.696909   3.0  26.0  52.0  64.0  92.0
+          Positioning      18159.0  49.958478  19.529036   2.0  38.0  55.0  64.0  95.0
+          Vision           18159.0  53.400903  14.146881  10.0  44.0  55.0  64.0  94.0
+          Penalties        18159.0  48.548598  15.704053   5.0  39.0  49.0  60.0  92.0
+          Composure        18159.0  58.648274  11.436133   3.0  51.0  60.0  67.0  96.0
+          Marking          18159.0  47.281623  19.904397   3.0  30.0  53.0  64.0  94.0
+          StandingTackle   18159.0  47.697836  21.664004   2.0  27.0  55.0  66.0  93.0
+          SlidingTackle    18159.0  45.661435  21.289135   3.0  24.0  52.0  64.0  91.0
+          GKDiving         18159.0  16.616223  17.695349   1.0   8.0  11.0  14.0  90.0
+          GKHandling       18159.0  16.391596  16.906900   1.0   8.0  11.0  14.0  92.0
+          GKKicking        18159.0  16.232061  16.502864   1.0   8.0  11.0  14.0  91.0
+          GKPositioning    18159.0  16.388898  17.034669   1.0   8.0  11.0  14.0  90.0
+          GKReflexes       18159.0  16.710887  17.955119   1.0   8.0  11.0  14.0  94.0
+\end{Verbatim}
+            
+    Concluyendo que las caracteristicas y habilidades no tienen un peso
+significativo en la evaluacion del valor del jugador, tomaremos un rango
+de destreza entre 60\% - 80\% para cada habilidad y clasificaremos a los
+jugadores que se encuentren ahí y que no tengan un valor de compra
+elevado.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}252}]:} \PY{n}{name\PYZus{}players}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{feat} \PY{o+ow}{in} \PY{n}{features\PYZus{}total}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{}print(feat)}
+              \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{var} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{feat}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                  \PY{c+c1}{\PYZsh{}print(var)}
+                  \PY{k}{if} \PY{n}{var} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{60} \PY{o+ow}{and} \PY{n}{var} \PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{:}
+                     \PY{n}{name\PYZus{}players}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}257}]:} \PY{n}{index\PYZus{}players}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{name\PYZus{}players}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}259}]:} \PY{n}{index\PYZus{}players}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{n}{keep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{first}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}259}]:}         index
+          0           0
+          1           1
+          2           2
+          3           5
+          4           6
+          {\ldots}       {\ldots}
+          254563  16896
+          254565  16978
+          254566  16987
+          254567  17022
+          254577  17428
+          
+          [18038 rows x 1 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}268}]:} \PY{n}{index\PYZus{}p}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n}{index\PYZus{}players}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{index\PYZus{}p}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}268}]:} 0                 L. Messi
+          1        Cristiano Ronaldo
+          2                Neymar Jr
+          5                E. Hazard
+          6                L. Modrić
+                         {\ldots}        
+          16944     L. Ashby-Hammond
+          17026          J. Tibbetts
+          17035            A. Fisher
+          17070               Taliby
+          17476             N. Mantl
+          Name: Name, Length: 18038, dtype: object
+\end{Verbatim}
+            
+    Ya tenemos a los jugadores que estan en nuestro rango de interes, ahora
+con respecto a su valor, cual de estos estan por debajo del 25\% de la
+estadistica que realizamos al inicio acerca del Valor, lo cual nos
+arrojaba que era de 300000(Euros)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}287}]:} \PY{n}{r}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{index\PYZus{}p}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          \PY{n}{data\PYZus{}players}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{r}\PY{p}{)}\PY{p}{]}
+          \PY{n}{data\PYZus{}players}\PY{o}{=}\PY{n}{data\PYZus{}players}\PY{p}{[}\PY{n}{data\PYZus{}players}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{300000}\PY{p}{]}
+          \PY{n}{data\PYZus{}players}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}287}]:}            ID                Name  Age Nationality  Overall  Potential  \textbackslash{}
+          452    207439          L. Paredes   24   Argentina       80         85   
+          538    156713        A. Granqvist   33      Sweden       80         80   
+          568    229909            A. Lunev   26      Russia       79         81   
+          677    187347        I. Smolnikov   29      Russia       79         79   
+          864    153260              Hilton   40      Brazil       78         78   
+          {\ldots}       {\ldots}                 {\ldots}  {\ldots}         {\ldots}      {\ldots}        {\ldots}   
+          18202  238813        J. Lundstram   19     England       47         65   
+          18203  243165  N. Christoffersson   19      Sweden       47         63   
+          18204  241638           B. Worman   16     England       47         67   
+          18205  246268      D. Walker-Rice   17     England       47         66   
+          18206  246269           G. Nugent   16     England       46         66   
+          
+                             Club    Value     Wage  Special  {\ldots} Penalties  Composure  \textbackslash{}
+          452                 NaN      0.0      0.0     2122  {\ldots}      57.0       74.0   
+          538                 NaN      0.0      0.0     1797  {\ldots}      79.0       78.0   
+          568                 NaN      0.0      0.0     1217  {\ldots}      15.0       69.0   
+          677                 NaN      0.0      0.0     2038  {\ldots}      41.0       73.0   
+          864     Montpellier HSC      0.0  18000.0     1807  {\ldots}      64.0       70.0   
+          {\ldots}                 {\ldots}      {\ldots}      {\ldots}      {\ldots}  {\ldots}       {\ldots}        {\ldots}   
+          18202   Crewe Alexandra  60000.0   1000.0     1307  {\ldots}      43.0       45.0   
+          18203    Trelleborgs FF  60000.0   1000.0     1098  {\ldots}      43.0       42.0   
+          18204  Cambridge United  60000.0   1000.0     1189  {\ldots}      55.0       41.0   
+          18205   Tranmere Rovers  60000.0   1000.0     1228  {\ldots}      50.0       46.0   
+          18206   Tranmere Rovers  60000.0   1000.0     1321  {\ldots}      33.0       43.0   
+          
+                 Marking  StandingTackle SlidingTackle GKDiving GKHandling GKKicking  \textbackslash{}
+          452       73.0            75.0          72.0      9.0       14.0       6.0   
+          538       82.0            83.0          79.0      7.0        9.0      12.0   
+          568       18.0            20.0          12.0     80.0       73.0      65.0   
+          677       76.0            76.0          80.0      7.0       12.0      10.0   
+          864       83.0            77.0          76.0     12.0        7.0      11.0   
+          {\ldots}        {\ldots}             {\ldots}           {\ldots}      {\ldots}        {\ldots}       {\ldots}   
+          18202     40.0            48.0          47.0     10.0       13.0       7.0   
+          18203     22.0            15.0          19.0     10.0        9.0       9.0   
+          18204     32.0            13.0          11.0      6.0        5.0      10.0   
+          18205     20.0            25.0          27.0     14.0        6.0      14.0   
+          18206     40.0            43.0          50.0     10.0       15.0       9.0   
+          
+                 GKPositioning GKReflexes  
+          452              9.0       10.0  
+          538             10.0       15.0  
+          568             77.0       85.0  
+          677              8.0       15.0  
+          864             12.0       13.0  
+          {\ldots}              {\ldots}        {\ldots}  
+          18202            8.0        9.0  
+          18203            5.0       12.0  
+          18204            6.0       13.0  
+          18205            8.0        9.0  
+          18206           12.0        9.0  
+          
+          [4467 rows x 56 columns]
+\end{Verbatim}
+            
+    Y la tabla anterior nos indicaria los jugadores subvalorados con grandes
+potencialidades como deportistas
+
+    \hypertarget{construcciuxf3n-del-modelo-de-machine-learning}{%
+\subsection{Construcción del Modelo de Machine
+Learning}\label{construcciuxf3n-del-modelo-de-machine-learning}}
+
+    Construiremos nuestro modelo apartir de las caracteristicas del mapa de
+correlaciones generado anteriormente y almacenada en un arreglo llamado
+feature\_abil\_value. Tomaremos como referencia de modelo el arbol de
+decisiones y arboles aleatorios, y veremos cual es más optimo para
+nuestro caso, comparando el error de valor absoluto medio MAE (La
+diferencia entre los valores reales y los predichos).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}293}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}absolute\PYZus{}error}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import} \PY{n}{DecisionTreeRegressor}
+          
+          \PY{c+c1}{\PYZsh{}variable objetivo}
+          \PY{n}{y}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{}Variables caracteristicas}
+          \PY{n}{x}\PY{o}{=}\PY{n}{data\PYZus{}fifa19\PYZus{}1}\PY{p}{[}\PY{n}{feature\PYZus{}abil\PYZus{}value}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{}datos de entrenamiento y validacion, colocamos como semilla o random\PYZus{}state =1 }
+          \PY{c+c1}{\PYZsh{}para que los valores se mantengan en cada interpretacion del programa}
+          \PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{val\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}y}\PY{p}{,} \PY{n}{val\PYZus{}y} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Especificamos el modelo}
+          \PY{n}{value\PYZus{}player\PYZus{}model}\PY{o}{=}\PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}optimizamos con los datos de entrenamiento}
+          \PY{n}{value\PYZus{}player\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}y}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}obtenemos la primera prediccion}
+          \PY{n}{predic1}\PY{o}{=}\PY{n}{value\PYZus{}player\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{val\PYZus{}x}\PY{p}{)}
+          \PY{n}{val\PYZus{}mae1}\PY{o}{=}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{predic1}\PY{p}{,}\PY{n}{val\PYZus{}y}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El valor MAE1 es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{val\PYZus{}mae1}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Buscamos la mejor opción de hojas o nodo de nuestro arbol para cuidarnos del desajuste y sobreajuste}
+          \PY{n}{candidate\PYZus{}max\PYZus{}leaf\PYZus{}nodes} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{250}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{]}
+          \PY{k}{def} \PY{n+nf}{get\PYZus{}mae}\PY{p}{(}\PY{n}{max\PYZus{}leaf\PYZus{}nodes}\PY{p}{,} \PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{val\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}y}\PY{p}{,} \PY{n}{val\PYZus{}y}\PY{p}{)}\PY{p}{:}
+              \PY{n}{model} \PY{o}{=} \PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{n}{max\PYZus{}leaf\PYZus{}nodes}\PY{o}{=}\PY{n}{max\PYZus{}leaf\PYZus{}nodes}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}y}\PY{p}{)}
+              \PY{n}{preds\PYZus{}val} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{val\PYZus{}x}\PY{p}{)}
+              \PY{n}{mae} \PY{o}{=} \PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{val\PYZus{}y}\PY{p}{,} \PY{n}{preds\PYZus{}val}\PY{p}{)}
+              \PY{k}{return}\PY{p}{(}\PY{n}{mae}\PY{p}{)}
+          
+          \PY{n}{range\PYZus{}1}\PY{o}{=}\PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+          \PY{k}{for} \PY{n}{max\PYZus{}leaf\PYZus{}nodes} \PY{o+ow}{in} \PY{n}{candidate\PYZus{}max\PYZus{}leaf\PYZus{}nodes}\PY{p}{:}
+              \PY{n}{my\PYZus{}mae}\PY{o}{=} \PY{n}{get\PYZus{}mae}\PY{p}{(}\PY{n}{max\PYZus{}leaf\PYZus{}nodes}\PY{p}{,} \PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{val\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}y}\PY{p}{,} \PY{n}{val\PYZus{}y}\PY{p}{)}
+              \PY{n}{range\PYZus{}1}\PY{p}{[}\PY{n}{max\PYZus{}leaf\PYZus{}nodes}\PY{p}{]}\PY{o}{=}\PY{n}{my\PYZus{}mae}
+              \PY{c+c1}{\PYZsh{}print(\PYZdq{}Max leaf nodes: \PYZpc{}d  \PYZbs{}t\PYZbs{}t Mean Absolute Error:  \PYZpc{}d\PYZdq{} \PYZpc{}(max\PYZus{}leaf\PYZus{}nodes, my\PYZus{}mae))}
+          
+          \PY{c+c1}{\PYZsh{} Store the best value of max\PYZus{}leaf\PYZus{}nodes (it will be either 5, 25, 50, 100, 250 or 500)}
+          \PY{n}{best\PYZus{}tree\PYZus{}size} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{range\PYZus{}1}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{n}{range\PYZus{}1}\PY{o}{.}\PY{n}{get}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{La mejor cantidad de nodes para el tamaño de mis dataset es:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{best\PYZus{}tree\PYZus{}size}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+El valor MAE1 es:  1138562.7753303964
+La mejor cantidad de nodes para el tamaño de mis dataset es: 250
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}294}]:} \PY{c+c1}{\PYZsh{}usamos el mejor nodo que encontramos anteriormente}
+          \PY{n}{value\PYZus{}player\PYZus{}model2}\PY{o}{=}\PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{n}{max\PYZus{}leaf\PYZus{}nodes}\PY{o}{=}\PY{l+m+mi}{250}\PY{p}{,}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{value\PYZus{}player\PYZus{}model2}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{,}\PY{n}{train\PYZus{}y}\PY{p}{)}
+          \PY{n}{predic2}\PY{o}{=}\PY{n}{value\PYZus{}player\PYZus{}model2}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{val\PYZus{}x}\PY{p}{)}
+          \PY{n}{val\PYZus{}mae2}\PY{o}{=}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{predic2}\PY{p}{,} \PY{n}{val\PYZus{}y}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El valor MAE2 es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{val\PYZus{}mae2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+El valor MAE2 es:  1013541.1117788058
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}296}]:} \PY{c+c1}{\PYZsh{}Ahora vamos con el arbol aleatorio}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestRegressor}
+          
+          \PY{c+c1}{\PYZsh{}definimos el modelo}
+          \PY{n}{value\PYZus{}player\PYZus{}rf}\PY{o}{=}\PY{n}{RandomForestRegressor}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}optimizamos el modelo}
+          \PY{n}{value\PYZus{}player\PYZus{}rf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}y}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}calculamos mae3}
+          \PY{n}{predic3}\PY{o}{=}\PY{n}{value\PYZus{}player\PYZus{}rf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{val\PYZus{}x}\PY{p}{)}
+          \PY{n}{mae3}\PY{o}{=}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{predic3}\PY{p}{,} \PY{n}{val\PYZus{}y}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El valor MAE3 es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{mae3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+El valor MAE3 es:  786133.2599118942
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}305}]:} \PY{c+c1}{\PYZsh{}validacion:}
+          \PY{c+c1}{\PYZsh{}utilizo las caracteristicas de mis jugadores subvalorados}
+          \PY{n}{predic\PYZus{}player}\PY{o}{=}\PY{n}{value\PYZus{}player\PYZus{}rf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{data\PYZus{}players}\PY{p}{[}\PY{n}{feature\PYZus{}abil\PYZus{}value}\PY{p}{]}\PY{p}{)}
+          \PY{n}{values\PYZus{}predict\PYZus{}players}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{data\PYZus{}players}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value\PYZus{}predict}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{predic\PYZus{}player}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{data\PYZus{}players}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{values\PYZus{}predict\PYZus{}players}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}305}]:}                      Name  Value\_predict   Value0
+          452            L. Paredes      2814000.0      0.0
+          538          A. Granqvist      1087200.0      0.0
+          568              A. Lunev       805950.0      0.0
+          677          I. Smolnikov      1840000.0      0.0
+          864                Hilton      1221500.0      0.0
+          {\ldots}                   {\ldots}            {\ldots}      {\ldots}
+          18202        J. Lundstram        87450.0  60000.0
+          18203  N. Christoffersson        81050.0  60000.0
+          18204           B. Worman        65700.0  60000.0
+          18205      D. Walker-Rice        76450.0  60000.0
+          18206           G. Nugent        85450.0  60000.0
+          
+          [4467 rows x 3 columns]
+\end{Verbatim}
+            
+    En la anterior tabla observamos el primer valor del jugador (Value0) y
+su predicción (Value\_predict)
+
+    \hypertarget{conclusiones}{%
+\subsection{Conclusiones}\label{conclusiones}}
+
+    Recomendación: Estos jugadores son subvalorados, porque no tienen una
+reputacion y/o perteneces algún Club recocnocido, pero en
+características físicas como en habilidades prometen y se comparan con
+las grandes estrellas del deporte. Con una buena posicion en el campo
+según sus habilidades más fuertes puede llegar a promocionarse por si
+mismo. Dentro de unos años sus destrezas serán muy bien evaluadas
+económicamente
+
+    Se generaron tres modelos, de los cuales el que es menos propenso al
+error, es el de arboles aleatorios. Su algoritmo a diferencia del arbol
+de decisión no esta tan sujeto a una clasificacion tan delicada de los
+patrones que pueden llegar a tener los datos, lo que hace mas eficiente
+y un poco menos perceptible a los desajustes o sobreajustes.
+
+    La limpieza de datos al inicio, facilito mucho el trabajo sobre machine
+learning, puesto que si se hubieran tomado naturalmente, hubiera sido
+propenso a muchos inconvenientes
+
+    \hypertarget{anderson-danilo-guerrero}{%
+\subsection{Anderson Danilo Guerrero}\label{anderson-danilo-guerrero}}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

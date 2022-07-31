@@ -1,0 +1,8 @@
+https://www.kaggle.com/chirag9073/fifa19-ultimate-team
+https://github.com/chiragsamal/FIFA-2019
+https://www.kaggle.com/roshansharma/fifa-data-visualization
+https://www.kaggle.com/nitindatta/fifa-in-depth-analysis-with-linear-regression
+https://www.kaggle.com/nitindatta/eda-with-r3-id
+https://www.kaggle.com/dczerniawko/fifa19-analysis
+https://www.kaggle.com/chirag9073
+https://towardsdatascience.com/moneyball-linear-regression-76034259af5e
