@@ -1,0 +1,3 @@
+For  each number i from 1 through n, find the maximum value of the logic land,
+or and xor when compared against all intergers through n
+that are greater than i. Consider a value only if the comparison returns a result less than k
