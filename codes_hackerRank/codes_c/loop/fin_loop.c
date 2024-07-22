@@ -22,7 +22,7 @@ int main()
           	aux1=i<=len-i?i-1:len-i;
           	aux2=j<=len-j?j-1:len-j;
           	aux3=aux1<=aux2?aux1:aux2;
-          	printf("%d",aux-aux3);
+          	printf("%d ",aux-aux3);
              }
       
           printf("\n");
