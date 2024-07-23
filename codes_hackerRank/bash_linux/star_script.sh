@@ -1,2 +1,7 @@
 #!/bin/bash
-echo "Hello"
+echo "Hello Hacker"
+
+for i in {1..99} 
+do
+echo $i
+done
